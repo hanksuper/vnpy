@@ -1,0 +1,50 @@
+# 2019.3.22更新
+## 新增
+- 新增目录examples/CtaBacktestingNewMACD
+  - 新增loadTickCsv.py 
+    用于加载Tick级回测数据，数据下载地址为：
+    https://pan.baidu.com/s/14MsLSWTbuGkqKBqiz_HGNw 提取码: 82xg    
+  - 新增runBacktesting_NewMACD.py 用于回测NewMacd策略的有效性
+  -  新增strategyNewMacd.py NewMacd策略的实现类
+
+## 修改
+- 修改ctaBacktesting.py,增加一个TICK_BAR_MODE模式。
+    此模式下，TICK级回测数据的数据类型和VNPY中BAR级别数据类型相同
+- 修改vtUtility.py, 增加一个任意n个Tick的合成K线的方法onNTickBar
+
+## 配置
+- 对于MacOS系统，配置完vnpy基本环境后，找到pyenv环境下的vnpy的库，我的路径为
+   /Users/cloudin1/.pyenv/versions/anaconda2-4.0.0/lib/python2.7/site-packages/vnpy
+- 将strategyNewMacd.py 添加到
+   /Users/cloudin1/.pyenv/versions/anaconda2-4.0.0/lib/python2.7/site-packages/vnpy/trader/app/ctaStrategy/strategy/
+- 分别将ctaBacktesting.py，vtUtility.py 覆盖对应路径中的文件
+
+## 运行
+和vnpy运行环境相同
+
+- 命令行模式：
+ pyenv local 2.7.8
+ pyenv global 2.7.8
+ source  ~/.zshrc
+ pyenv local anaconda2-4.0.0
+ sudo mongod &
+
+- 调试模式：
+  把Project Interpreter选为.pyenv/versions/anaconda2-4.0.0/bin/python
+
+# 2019.4.3更新
+## 新增
+- 新增examples/CtaBacktestingNewMACD/dataClean.py
+  用于将原始rb的tick级数据清洗。
+
+# 2019.4.4更新
+## 新增
+- 新增examples/CtaBacktestingNewMACD/dataClearn.py 用于将原始数据清洗
+    原始数据下载地址为：链接: https://pan.baidu.com/s/1xHpnFXZ1Yo1iSWR7wNZe_A 提取码: 4547
+   
+## 修改
+- 修改ctaBacktesting.py,删除TICK_BAR_MODE模式。
+- 修改loadTickCsv.py, 使用新方法loadTickCSV添加Tick级别数据到mongodb
+- 修改runBacktesting_NewMACD.py，回测模式改为TICK_MODE，数据改为rb_tick_data_2013
+- 修改ctaHistoryData.py,新增loadTickCSV方法，用于添加Tick级别数据到mongodb
+- 修改vtUtility.py，修改updateTickBar合成模式，改为按时间模式合成bar返回
